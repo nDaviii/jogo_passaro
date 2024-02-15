@@ -3,8 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+    <!-- Inclusão da biblioteca Phaser -->
     <script src="https://cdn.jsdelivr.net/npm/phaser@3.55.2/dist/phaser.min.js"></script>
+
     <title>Exercício do Pássaro</title>
+
+    <!-- Estilo CSS para centralizar a tela -->
     <style>
         body {
             display: flex;
@@ -18,12 +23,13 @@
 <body>
 
 <script>
-
+    // Configuração do jogo phaser
     var config = {
         type: Phaser.AUTO,
         width: 800,
         height: 600,
-
+        
+        // Definição das funções do jogo
         scene: {
             preload: preload,
             create: create,
@@ -31,18 +37,22 @@
         }
     };
 
+    // Definição do objeto do novo jogo
     var game = new Phaser.Game(config);
 
+    // Definição da variável do pássaro
     var redBird;
 
+    // Menu de opções a ser mostrada no console
     var options = ["Cook something.", "Play another game. (Pokemon is a great option)", "Study something new.", "Listen to favorite music.", "Look at it infinitely and have fun! :)"];
 
+    // Exibição das opções no console
     console.log("What can I do while this game is still running?");
-
     for (let i of options) {
         console.log(i)
     }
 
+    // Pré-carregamento de imagens e spritesheet
     function preload() {
         this.load.image('bg', 'assets/bg_space.png');
         this.load.image('logo', 'assets/logo-inteli_branco.png');
@@ -50,11 +60,12 @@
     }
 
     function create() {
+        // Adição das imagens e da spritesheet
         this.add.image(400, 300, 'bg').setScale(1.2);
         this.add.image(400, 300, 'logo').setScale(0.5);
         redBird = this.add.sprite(100, 300, 'red bird').setScale(1.3);
 
-
+        // Animação de voo para o pássaro
         this.anims.create({
             key:'fly',
             frames: this.anims.generateFrameNumbers('red bird', {start:0, end:7}),
@@ -62,32 +73,36 @@
             repeat: -1
         });
 
-
+        // Início da animação de voo
         redBird.anims.play('fly', true);
 
     }
 
+     // Lógica de movimento do pássaro
     function update() { 
+       // Subida eixo y
         if (redBird.x === 100 && redBird.y>100) {
-            redBird.subida=true;
-            redBird.angle=270;
+            redBird.subida = true;
+            redBird.angle = 270;
             redBird.setFlip(false, true);
         };
-                
+        
         if (redBird.x === 100 && redBird.y>100 && redBird.subida===true) {
-            redBird.y-=5;
+            redBird.y -= 5;
         };
 
+        // Progressão eixo x
         if (redBird.x === 100 && redBird.y===100) {
-            redBird.ida=true;
+            redBird.ida = true;
             redBird.setFlip(true, false);
-            redBird.angle=180;
+            redBird.angle = 180;
         };
 
         if (redBird.x<700 && redBird.ida===true) {
-            redBird.x+=5;
+            redBird.x += 5;
         };
 
+        // Descida eixo y
         if (redBird.x === 700 && redBird.y<500) {
             redBird.subida=false;
             redBird.setFlip(false, true);
@@ -98,6 +113,7 @@
             redBird.y+=5;
         };
 
+        // Regressão eixo x
         if (redBird.x === 700 && redBird.y===500) {
             redBird.ida=false;
             redBird.setFlip(true, false);
