@@ -33,6 +33,6 @@ Dentre os arquivos e pastas presentes na raiz do projeto, definem-se:
 
 ## 🔧 Como executar o código
 1. Clone o repositório;
-2. Acesse o repositório;
-3. Abra o arquivo "index.html";
+2. Acesse o repositório com o VS Code;
+3. Abra o arquivo "index.html" com a extensão Live Server;
 4. <b>Divirta-se!</b> :)
